@@ -13,28 +13,109 @@ const totalQuestion = document.getElementById("totalQuestion");
 const scoreText = document.getElementById("score");
 const lifeText = document.getElementById("life");
 
-let currentQuestion = 0;
-
 let score = 0;
 let life = 3;
+
+let currentQuestion = 0;
 
 let timer = 15;
 let timerInterval;
 
-document.getElementById("startBtn").addEventListener("click", startGame);
+let gameQuestions = [];
+
+document.getElementById("startBtn").onclick = startGame;
 
 function startGame(){
 
-    home.style.display = "none";
-    game.style.display = "block";
+    home.style.display="none";
+    game.style.display="block";
 
-    currentQuestion = 0;
-    score = 0;
-    life = 3;
+    score=0;
+    life=3;
 
-    totalQuestion.innerHTML = questions.length;
+    createQuestions();
+
+    totalQuestion.innerHTML=gameQuestions.length;
+
+    currentQuestion=0;
 
     loadQuestion();
+
+}
+
+function createQuestions(){
+
+    gameQuestions=[];
+
+    players.forEach(player=>{
+
+        gameQuestions.push({
+
+            mode:"blur",
+
+            image:player.images.blur,
+
+            reveal:player.images.normal,
+
+            answer:player.name,
+
+            options:createOptions(player.name)
+
+        });
+
+        gameQuestions.push({
+
+            mode:"zoom",
+
+            image:player.images.zoom,
+
+            reveal:player.images.normal,
+
+            answer:player.name,
+
+            options:createOptions(player.name)
+
+        });
+
+        gameQuestions.push({
+
+            mode:"pixel",
+
+            image:player.images.pixel,
+
+            reveal:player.images.normal,
+
+            answer:player.name,
+
+            options:createOptions(player.name)
+
+        });
+
+    });
+
+}
+
+function createOptions(correct){
+
+    let names=players.map(p=>p.name);
+
+    let options=[correct];
+
+    while(options.length<4){
+
+        let random=names[Math.floor(Math.random()*names.length)];
+
+        if(!options.includes(random)){
+
+            options.push(random);
+
+        }
+
+    }
+
+    options.sort(()=>Math.random()-0.5);
+
+    return options;
 
 }
 
@@ -42,29 +123,30 @@ function loadQuestion(){
 
     clearInterval(timerInterval);
 
-    timer = 15;
+    timer=15;
 
-    progressBar.style.width = "100%";
+    progressBar.style.width="100%";
 
-    scoreText.innerHTML = score;
-    lifeText.innerHTML = life;
+    scoreText.innerHTML=score;
+    lifeText.innerHTML=life;
 
-    questionNumber.innerHTML = currentQuestion + 1;
+    questionNumber.innerHTML=currentQuestion+1;
 
-    const q = questions[currentQuestion];
+    const q=gameQuestions[currentQuestion];
 
-    playerImage.src = q.image;
+    playerImage.src=q.image;
 
-    resultText.innerHTML = "";
+    resultText.innerHTML="";
 
     buttons.forEach((btn,index)=>{
 
-        btn.disabled = false;
-        btn.style.background = "";
+        btn.disabled=false;
 
-        btn.innerHTML = q.options[index];
+        btn.style.background="";
 
-        btn.onclick = ()=>checkAnswer(index);
+        btn.innerHTML=q.options[index];
+
+        btn.onclick=()=>checkAnswer(index);
 
     });
 
@@ -74,11 +156,11 @@ function loadQuestion(){
 
 function startTimer(){
 
-    timerInterval = setInterval(()=>{
+    timerInterval=setInterval(()=>{
 
         timer--;
 
-        progressBar.style.width = (timer/15)*100+"%";
+        progressBar.style.width=(timer/15)*100+"%";
 
         if(timer<=0){
 
@@ -96,42 +178,39 @@ function checkAnswer(index){
 
     clearInterval(timerInterval);
 
-    const q = questions[currentQuestion];
+    const q=gameQuestions[currentQuestion];
 
     buttons.forEach(btn=>btn.disabled=true);
 
     if(buttons[index].innerHTML===q.answer){
 
-        score += 10;
-
-        buttons[index].style.background="#16a34a";
+        score+=10;
 
         resultText.innerHTML="✅ Correct";
+
+        buttons[index].style.background="#16a34a";
 
     }else{
 
         life--;
 
-        buttons[index].style.background="#dc2626";
-
         resultText.innerHTML="❌ Wrong";
 
-        buttons.forEach(btn=>{
-
-            if(btn.innerHTML===q.answer){
-
-                btn.style.background="#16a34a";
-
-            }
-
-        });
+        buttons[index].style.background="#dc2626";
 
     }
 
-    scoreText.innerHTML = score;
-    lifeText.innerHTML = life;
+    buttons.forEach(btn=>{
 
-    playerImage.src = q.reveal;
+        if(btn.innerHTML===q.answer){
+
+            btn.style.background="#16a34a";
+
+        }
+
+    });
+
+    playerImage.src=q.reveal;
 
     setTimeout(nextQuestion,2000);
 
@@ -143,17 +222,15 @@ function timeUp(){
 
     life--;
 
-    lifeText.innerHTML = life;
-
-    const q = questions[currentQuestion];
-
-    buttons.forEach(btn=>btn.disabled=true);
+    const q=gameQuestions[currentQuestion];
 
     resultText.innerHTML="⏰ Time Up";
 
     playerImage.src=q.reveal;
 
     buttons.forEach(btn=>{
+
+        btn.disabled=true;
 
         if(btn.innerHTML===q.answer){
 
@@ -171,7 +248,9 @@ function nextQuestion(){
 
     if(life<=0){
 
-        gameOver();
+        alert("Game Over\n\nScore : "+score);
+
+        location.reload();
 
         return;
 
@@ -179,20 +258,12 @@ function nextQuestion(){
 
     currentQuestion++;
 
-    if(currentQuestion>=questions.length){
+    if(currentQuestion>=gameQuestions.length){
 
         currentQuestion=0;
 
     }
 
     loadQuestion();
-
-}
-
-function gameOver(){
-
-    alert("Game Over!\n\nFinal Score : "+score);
-
-    location.reload();
 
 }
