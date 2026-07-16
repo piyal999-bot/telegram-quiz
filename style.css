@@ -69,6 +69,45 @@ button{
 
 }
 
+.top-bar{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:25px;
+
+font-size:22px;
+
+}
+
+#playerImage{
+
+width:250px;
+
+height:250px;
+
+object-fit:cover;
+
+border-radius:20px;
+
+background:#222;
+
+margin:25px auto;
+
+display:block;
+
+}
+
+.answers{
+
+display:grid;
+
+grid-template-columns:1fr;
+
+gap:15px;
+
+}
 button:hover{
 
     transform:scale(1.05);
