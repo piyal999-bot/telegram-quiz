@@ -88,3 +88,105 @@ function shuffleArray(array){
     return array;
 
 }
+
+// ==========================
+// Part 2
+// ==========================
+
+function loadQuestion(){
+
+    clearInterval(timerInterval);
+
+    timer = 15;
+
+    progressBar.style.width = "100%";
+
+    resultText.innerHTML = "";
+
+    questionNumber.innerHTML = currentQuestion + 1;
+
+    scoreText.innerHTML = score;
+
+    lifeText.innerHTML = life;
+
+    const q = gameQuestions[currentQuestion];
+
+
+
+    // Emoji
+
+    emoji1.innerHTML = q.emoji[0];
+
+    emoji2.innerHTML = q.emoji[1];
+
+    emoji3.innerHTML = q.emoji[2];
+
+
+
+    // Random Options
+
+    let options = [q.answer];
+
+
+
+    while(options.length < 4){
+
+        const randomPlayer = questions[Math.floor(Math.random()*questions.length)];
+
+        if(!options.includes(randomPlayer.answer)){
+
+            options.push(randomPlayer.answer);
+
+        }
+
+    }
+
+
+
+    options = shuffleArray(options);
+
+
+
+    buttons.forEach((btn,index)=>{
+
+        btn.disabled = false;
+
+        btn.style.background = "#334155";
+
+        btn.innerHTML = options[index];
+
+        btn.onclick = ()=>checkAnswer(index);
+
+    });
+
+
+
+    startTimer();
+
+}
+
+
+
+// ==========================
+
+function startTimer(){
+
+    timerInterval = setInterval(()=>{
+
+        timer--;
+
+        progressBar.style.width = (timer/15)*100 + "%";
+
+
+
+        if(timer<=0){
+
+            clearInterval(timerInterval);
+
+            timeUp();
+
+        }
+
+    },1000);
+
+}
