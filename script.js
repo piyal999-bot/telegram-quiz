@@ -7,24 +7,49 @@ const buttons = document.querySelectorAll(".answer");
 
 let currentQuestion = 0;
 
-document.getElementById("startBtn").onclick = () => {
+document.getElementById("startBtn").onclick = startGame;
 
-    home.style.display = "none";
-    game.style.display = "block";
+function startGame(){
+
+    home.style.display="none";
+
+    game.style.display="block";
 
     loadQuestion();
 
-};
+}
 
 function loadQuestion(){
 
     const q = questions[currentQuestion];
 
-    playerImage.src = q.zoomImage;
+    playerImage.src = q.image;
 
     for(let i=0;i<4;i++){
 
         buttons[i].innerText = q.options[i];
+
+        buttons[i].onclick = ()=>{
+
+            checkAnswer(i);
+
+        };
+
+    }
+
+}
+
+function checkAnswer(index){
+
+    const q = questions[currentQuestion];
+
+    if(buttons[index].innerText===q.answer){
+
+        alert("Correct");
+
+    }else{
+
+        alert("Wrong");
 
     }
 
