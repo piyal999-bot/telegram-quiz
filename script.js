@@ -3,10 +3,13 @@ const game = document.getElementById("gameScreen");
 
 const playerImage = document.getElementById("playerImage");
 const resultText = document.getElementById("resultText");
+const timerText = document.getElementById("timer");
 
 const buttons = document.querySelectorAll(".answer");
 
 let currentQuestion = 0;
+let timer = 15;
+let timerInterval;
 
 document.getElementById("startBtn").addEventListener("click", startGame);
 
@@ -23,6 +26,11 @@ function startGame() {
 
 function loadQuestion() {
 
+    clearInterval(timerInterval);
+
+    timer = 15;
+    timerText.innerHTML = timer;
+
     const q = questions[currentQuestion];
 
     playerImage.src = q.image;
@@ -32,60 +40,107 @@ function loadQuestion() {
     for (let i = 0; i < buttons.length; i++) {
 
         buttons[i].disabled = false;
+        buttons[i].style.background = "";
 
         buttons[i].innerHTML = q.options[i];
-
-        buttons[i].style.background = "";
 
         buttons[i].onclick = () => checkAnswer(i);
 
     }
 
+    startTimer();
+
 }
 
-function checkAnswer(index) {
+function startTimer() {
 
-    const q = questions[currentQuestion];
+    timerInterval = setInterval(() => {
 
-    buttons.forEach(btn => btn.disabled = true);
+        timer--;
 
-    if (buttons[index].innerHTML === q.answer) {
+        timerText.innerHTML = timer;
 
-        buttons[index].style.background = "#16a34a";
+        if (timer <= 0) {
 
-        resultText.innerHTML = "✅ Correct";
+            clearInterval(timerInterval);
 
-    } else {
-
-        buttons[index].style.background = "#dc2626";
-
-        resultText.innerHTML = "❌ Wrong";
-
-        for (let i = 0; i < buttons.length; i++) {
-
-            if (buttons[i].innerHTML === q.answer) {
-
-                buttons[i].style.background = "#16a34a";
-
-            }
+            timeUp();
 
         }
 
-    }
-
-    playerImage.src = q.reveal;
-
-    setTimeout(nextQuestion, 2000);
+    },1000);
 
 }
 
-function nextQuestion() {
+function checkAnswer(index){
+
+    clearInterval(timerInterval);
+
+    const q = questions[currentQuestion];
+
+    buttons.forEach(btn=>btn.disabled=true);
+
+    if(buttons[index].innerHTML===q.answer){
+
+        buttons[index].style.background="#16a34a";
+
+        resultText.innerHTML="✅ Correct";
+
+    }else{
+
+        buttons[index].style.background="#dc2626";
+
+        resultText.innerHTML="❌ Wrong";
+
+        buttons.forEach(btn=>{
+
+            if(btn.innerHTML===q.answer){
+
+                btn.style.background="#16a34a";
+
+            }
+
+        });
+
+    }
+
+    playerImage.src=q.reveal;
+
+    setTimeout(nextQuestion,2000);
+
+}
+
+function timeUp(){
+
+    const q=questions[currentQuestion];
+
+    buttons.forEach(btn=>btn.disabled=true);
+
+    resultText.innerHTML="⏰ Time Up";
+
+    playerImage.src=q.reveal;
+
+    buttons.forEach(btn=>{
+
+        if(btn.innerHTML===q.answer){
+
+            btn.style.background="#16a34a";
+
+        }
+
+    });
+
+    setTimeout(nextQuestion,2000);
+
+}
+
+function nextQuestion(){
 
     currentQuestion++;
 
-    if (currentQuestion >= questions.length) {
+    if(currentQuestion>=questions.length){
 
-        currentQuestion = 0;
+        currentQuestion=0;
 
     }
 
