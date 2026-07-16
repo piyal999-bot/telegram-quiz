@@ -2,55 +2,93 @@ const home = document.getElementById("homeScreen");
 const game = document.getElementById("gameScreen");
 
 const playerImage = document.getElementById("playerImage");
+const resultText = document.getElementById("resultText");
 
 const buttons = document.querySelectorAll(".answer");
 
 let currentQuestion = 0;
 
-document.getElementById("startBtn").onclick = startGame;
+document.getElementById("startBtn").addEventListener("click", startGame);
 
-function startGame(){
+function startGame() {
 
-    home.style.display="none";
+    home.style.display = "none";
+    game.style.display = "block";
 
-    game.style.display="block";
+    currentQuestion = 0;
 
     loadQuestion();
 
 }
 
-function loadQuestion(){
+function loadQuestion() {
 
     const q = questions[currentQuestion];
 
     playerImage.src = q.image;
 
-    for(let i=0;i<4;i++){
+    resultText.innerHTML = "";
 
-        buttons[i].innerText = q.options[i];
+    for (let i = 0; i < buttons.length; i++) {
 
-        buttons[i].onclick = ()=>{
+        buttons[i].disabled = false;
 
-            checkAnswer(i);
+        buttons[i].innerHTML = q.options[i];
 
-        };
+        buttons[i].style.background = "";
+
+        buttons[i].onclick = () => checkAnswer(i);
 
     }
 
 }
 
-function checkAnswer(index){
+function checkAnswer(index) {
 
     const q = questions[currentQuestion];
 
-    if(buttons[index].innerText===q.answer){
+    buttons.forEach(btn => btn.disabled = true);
 
-        alert("Correct");
+    if (buttons[index].innerHTML === q.answer) {
 
-    }else{
+        buttons[index].style.background = "#16a34a";
 
-        alert("Wrong");
+        resultText.innerHTML = "✅ Correct";
+
+    } else {
+
+        buttons[index].style.background = "#dc2626";
+
+        resultText.innerHTML = "❌ Wrong";
+
+        for (let i = 0; i < buttons.length; i++) {
+
+            if (buttons[i].innerHTML === q.answer) {
+
+                buttons[i].style.background = "#16a34a";
+
+            }
+
+        }
 
     }
+
+    playerImage.src = q.reveal;
+
+    setTimeout(nextQuestion, 2000);
+
+}
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+    if (currentQuestion >= questions.length) {
+
+        currentQuestion = 0;
+
+    }
+
+    loadQuestion();
 
 }
