@@ -1,269 +1,164 @@
-const home = document.getElementById("homeScreen");
-const game = document.getElementById("gameScreen");
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
 
-const playerImage = document.getElementById("playerImage");
-const resultText = document.getElementById("resultText");
+body{
+    background:#0f172a;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+}
 
-const buttons = document.querySelectorAll(".answer");
+.container{
+    width:100%;
+    max-width:430px;
+    background:#1e293b;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
 
-const progressBar = document.getElementById("progressBar");
-const questionNumber = document.getElementById("questionNumber");
-const totalQuestion = document.getElementById("totalQuestion");
+h1{
+    text-align:center;
+    margin-bottom:15px;
+}
 
-const scoreText = document.getElementById("score");
-const lifeText = document.getElementById("life");
+.subtitle{
+    text-align:center;
+    color:#cbd5e1;
+    margin-bottom:25px;
+    line-height:1.6;
+}
 
-let score = 0;
-let life = 3;
+#startBtn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#22c55e;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+}
 
-let currentQuestion = 0;
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    font-size:20px;
+}
 
-let timer = 15;
-let timerInterval;
+.progress{
+    width:100%;
+    height:10px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
 
-let gameQuestions = [];
+#progressBar{
+    width:100%;
+    height:100%;
+    background:#22c55e;
+    transition:width 1s linear;
+}
 
-document.getElementById("startBtn").onclick = startGame;
+.questionNo{
+    text-align:center;
+    margin-bottom:15px;
+    color:#cbd5e1;
+}
 
-function startGame(){
+#playerImage{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:15px;
+    background:#111827;
+    margin-bottom:15px;
+}
 
-    home.style.display="none";
-    game.style.display="block";
+#resultText{
+    text-align:center;
+    min-height:30px;
+    margin-bottom:15px;
+}
 
-    score=0;
-    life=3;
+.answers{
+    display:grid;
+    gap:12px;
+}
 
-    createQuestions();
+.answer{
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#334155;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:.25s;
+}
 
-    totalQuestion.innerHTML=gameQuestions.length;
+.answer:hover{
+    background:#475569;
+}
 
-    currentQuestion=0;
+.answer:disabled{
+    cursor:not-allowed;
+}
 
-    loadQuestion();
+#revealScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(15,23,42,.96);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    z-index:999;
+
+    padding:20px;
 
 }
 
-function createQuestions(){
+#revealImage{
 
-    gameQuestions=[];
+    width:260px;
 
-    players.forEach(player=>{
+    height:260px;
 
-        gameQuestions.push({
+    object-fit:cover;
 
-            mode:"blur",
+    border-radius:20px;
 
-            image:player.images.blur,
-
-            reveal:player.images.normal,
-
-            answer:player.name,
-
-            options:createOptions(player.name)
-
-        });
-
-        gameQuestions.push({
-
-            mode:"zoom",
-
-            image:player.images.zoom,
-
-            reveal:player.images.normal,
-
-            answer:player.name,
-
-            options:createOptions(player.name)
-
-        });
-
-        gameQuestions.push({
-
-            mode:"pixel",
-
-            image:player.images.pixel,
-
-            reveal:player.images.normal,
-
-            answer:player.name,
-
-            options:createOptions(player.name)
-
-        });
-
-    });
+    margin:25px 0;
 
 }
 
-function createOptions(correct){
+#revealTitle{
 
-    let names=players.map(p=>p.name);
-
-    let options=[correct];
-
-    while(options.length<4){
-
-        let random=names[Math.floor(Math.random()*names.length)];
-
-        if(!options.includes(random)){
-
-            options.push(random);
-
-        }
-
-    }
-
-    options.sort(()=>Math.random()-0.5);
-
-    return options;
+    font-size:40px;
 
 }
 
-function loadQuestion(){
+#revealName{
 
-    clearInterval(timerInterval);
-
-    timer=15;
-
-    progressBar.style.width="100%";
-
-    scoreText.innerHTML=score;
-    lifeText.innerHTML=life;
-
-    questionNumber.innerHTML=currentQuestion+1;
-
-    const q=gameQuestions[currentQuestion];
-
-    playerImage.src=q.image;
-
-    resultText.innerHTML="";
-
-    buttons.forEach((btn,index)=>{
-
-        btn.disabled=false;
-
-        btn.style.background="";
-
-        btn.innerHTML=q.options[index];
-
-        btn.onclick=()=>checkAnswer(index);
-
-    });
-
-    startTimer();
-
-}
-
-function startTimer(){
-
-    timerInterval=setInterval(()=>{
-
-        timer--;
-
-        progressBar.style.width=(timer/15)*100+"%";
-
-        if(timer<=0){
-
-            clearInterval(timerInterval);
-
-            timeUp();
-
-        }
-
-    },1000);
-
-}
-
-function checkAnswer(index){
-
-    clearInterval(timerInterval);
-
-    const q=gameQuestions[currentQuestion];
-
-    buttons.forEach(btn=>btn.disabled=true);
-
-    if(buttons[index].innerHTML===q.answer){
-
-        score+=10;
-
-        resultText.innerHTML="✅ Correct";
-
-        buttons[index].style.background="#16a34a";
-
-    }else{
-
-        life--;
-
-        resultText.innerHTML="❌ Wrong";
-
-        buttons[index].style.background="#dc2626";
-
-    }
-
-    buttons.forEach(btn=>{
-
-        if(btn.innerHTML===q.answer){
-
-            btn.style.background="#16a34a";
-
-        }
-
-    });
-
-    playerImage.src=q.reveal;
-
-    setTimeout(nextQuestion,2000);
-
-}
-
-function timeUp(){
-
-    clearInterval(timerInterval);
-
-    life--;
-
-    const q=gameQuestions[currentQuestion];
-
-    resultText.innerHTML="⏰ Time Up";
-
-    playerImage.src=q.reveal;
-
-    buttons.forEach(btn=>{
-
-        btn.disabled=true;
-
-        if(btn.innerHTML===q.answer){
-
-            btn.style.background="#16a34a";
-
-        }
-
-    });
-
-    setTimeout(nextQuestion,2000);
-
-}
-
-function nextQuestion(){
-
-    if(life<=0){
-
-        alert("Game Over\n\nScore : "+score);
-
-        location.reload();
-
-        return;
-
-    }
-
-    currentQuestion++;
-
-    if(currentQuestion>=gameQuestions.length){
-
-        currentQuestion=0;
-
-    }
-
-    loadQuestion();
+    font-size:30px;
 
 }
