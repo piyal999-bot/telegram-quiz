@@ -1,60 +1,111 @@
-const questions = [
+const players = [
 
 {
     id:1,
-    pack:"classic",
-    mode:"blur",
-    difficulty:"easy",
 
-    image:"assets/blur/haaland.jpg",
-    reveal:"assets/players/haaland.jpg",
+    name:"Erling Haaland",
 
-    answer:"Erling Haaland",
+    images:{
 
-    options:[
-        "Erling Haaland",
-        "Harry Kane",
-        "Kylian Mbappé",
-        "Jude Bellingham"
+        normal:"assets/players/haaland.jpg",
+
+        blur:"assets/blur/haaland.jpg",
+
+        zoom:"assets/zoom/haaland.jpg",
+
+        pixel:"assets/pixel/haaland.jpg",
+
+        jersey:"assets/jersey/haaland.jpg",
+
+        celebration:"assets/celebration/haaland.jpg"
+
+    },
+
+    career:[
+        "Norway",
+        "Molde",
+        "Borussia Dortmund",
+        "Manchester City"
+    ],
+
+    emoji:[
+        "🇳🇴",
+        "🤖",
+        "⚽"
     ]
+
 },
 
 {
     id:2,
-    pack:"classic",
-    mode:"zoom",
-    difficulty:"medium",
 
-    image:"assets/zoom/mbappe.jpg",
-    reveal:"assets/players/mbappe.jpg",
+    name:"Kylian Mbappé",
 
-    answer:"Kylian Mbappé",
+    images:{
 
-    options:[
-        "Vinicius Jr",
-        "Kylian Mbappé",
-        "Erling Haaland",
-        "Harry Kane"
+        normal:"assets/players/mbappe.jpg",
+
+        blur:"assets/blur/mbappe.jpg",
+
+        zoom:"assets/zoom/mbappe.jpg",
+
+        pixel:"assets/pixel/mbappe.jpg",
+
+        jersey:"assets/jersey/mbappe.jpg",
+
+        celebration:"assets/celebration/mbappe.jpg"
+
+    },
+
+    career:[
+        "France",
+        "Monaco",
+        "PSG",
+        "Real Madrid"
+    ],
+
+    emoji:[
+        "🇫🇷",
+        "⚡",
+        "🐢"
     ]
+
 },
 
 {
     id:3,
-    pack:"classic",
-    mode:"pixel",
-    difficulty:"hard",
 
-    image:"assets/pixel/bellingham.jpg",
-    reveal:"assets/players/bellingham.jpg",
+    name:"Jude Bellingham",
 
-    answer:"Jude Bellingham",
+    images:{
 
-    options:[
-        "Pedri",
-        "Kevin De Bruyne",
-        "Jude Bellingham",
-        "Lionel Messi"
+        normal:"assets/players/bellingham.jpg",
+
+        blur:"assets/blur/bellingham.jpg",
+
+        zoom:"assets/zoom/bellingham.jpg",
+
+        pixel:"assets/pixel/bellingham.jpg",
+
+        jersey:"assets/jersey/bellingham.jpg",
+
+        celebration:"assets/celebration/bellingham.jpg"
+
+    },
+
+    career:[
+        "England",
+        "Birmingham",
+        "Borussia Dortmund",
+        "Real Madrid"
+    ],
+
+    emoji:[
+        "🏴",
+        "⭐",
+        "🦁"
     ]
+
 }
 
 ];
