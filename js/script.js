@@ -8,9 +8,9 @@ const gameScreen = document.getElementById("gameScreen");
 
 const startBtn = document.getElementById("startBtn");
 
-const emoji1 = document.getElementById("emoji1");
-const emoji2 = document.getElementById("emoji2");
-const emoji3 = document.getElementById("emoji3");
+const hint1 = document.getElementById("hint1");
+const hint2 = document.getElementById("hint2");
+const hint3 = document.getElementById("hint3");
 
 const questionNumber = document.getElementById("questionNumber");
 const totalQuestion = document.getElementById("totalQuestion");
@@ -113,13 +113,13 @@ function loadQuestion(){
 
 
 
-    // Emoji
+// Hint Images
 
-    emoji1.innerHTML = q.emoji[0];
+hint1.src = q.hints[0];
 
-    emoji2.innerHTML = q.emoji[1];
+hint2.src = q.hints[1];
 
-    emoji3.innerHTML = q.emoji[2];
+hint3.src = q.hints[2];
 
 
 
@@ -310,17 +310,67 @@ function gameOver(){
 
     clearInterval(timerInterval);
 
+    let win = life > 0 && currentQuestion >= gameQuestions.length - 1;
+let rank = "";
+
+if(score === 300){
+
+    rank = "🐐 GOAT";
+
+}else if(score >= 260){
+
+    rank = "👑 Football IQ Master";
+
+}else if(score >= 180){
+
+    rank = "🥇 Football Expert";
+
+}else if(score >= 100){
+
+    rank = "🥈 Rising Star";
+
+}else{
+
+    rank = "🥉 Rookie";
+
+}
+
     gameScreen.style.display = "none";
 
     revealScreen.style.display = "flex";
 
-    revealTitle.innerHTML = "🏆 Game Over";
+    if(win){
+
+    revealTitle.innerHTML = "🏆 Congratulations!";
+
+}else{
+
+    revealTitle.innerHTML = "💀 Game Over";
+
+}
 
     revealTitle.style.color = "#ffffff";
 
     revealImage.style.display = "none";
 
-    revealName.innerHTML = "Final Score : " + score;
+    if(win){
+
+    revealName.innerHTML = `
+        ⭐ Final Score: ${score}/300<br><br>
+        ❤️ Lives Left: ${life}<br><br>
+        🏅 ${rank}<br><br>
+        🎉 You completed all 30 questions!
+    `;
+
+}else{
+
+    revealName.innerHTML = `
+        ⭐ Final Score: ${score}<br><br>
+        🏅 ${rank}<br><br>
+        Better luck next time!
+    `;
+
+}
 
     document.getElementById("nextText").innerHTML = `
         <br>
