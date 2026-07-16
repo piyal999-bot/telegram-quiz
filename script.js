@@ -1,5 +1,11 @@
-document.getElementById("startBtn").addEventListener("click",()=>{
+const home=document.getElementById("homeScreen");
 
-    alert("Game Coming Soon 🚀");
+const game=document.getElementById("gameScreen");
 
-});
+document.getElementById("startBtn").onclick=()=>{
+
+home.style.display="none";
+
+game.style.display="block";
+
+};
