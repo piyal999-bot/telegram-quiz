@@ -4,7 +4,6 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Football IQ Challenge</title>
@@ -22,15 +21,11 @@
         <h1>⚽ Football IQ Challenge</h1>
 
         <p class="subtitle">
-
-            Guess the football player before time runs out!
-
+            Guess the football player from only 3 emoji hints!
         </p>
 
         <button id="startBtn">
-
             ▶ Start Game
-
         </button>
 
     </div>
@@ -46,15 +41,11 @@
         <div class="top-bar">
 
             <div class="life-box">
-
                 ❤️ <span id="life">3</span>
-
             </div>
 
             <div class="score-box">
-
                 ⭐ <span id="score">0</span>
-
             </div>
 
         </div>
@@ -64,9 +55,7 @@
         <!-- Timer -->
 
         <div class="progress">
-
             <div id="progressBar"></div>
-
         </div>
 
 
@@ -76,42 +65,25 @@
         <div class="questionNo">
 
             Question
-
             <span id="questionNumber">1</span>
-
             /
-
-            <span id="totalQuestion">0</span>
-
-        </div>
-
-
-
-        <!-- Game Mode -->
-
-        <div class="mode-box">
-
-            <span id="gameMode">
-
-                Blur Challenge
-
-            </span>
+            <span id="totalQuestion">30</span>
 
         </div>
 
 
 
-        <!-- Image -->
+        <!-- Emoji Hint -->
 
-        <img
+        <div id="emojiContainer" class="emoji-container">
 
-            id="playerImage"
+            <div class="emoji-card" id="emoji1">🇦🇷</div>
 
-            src=""
+            <div class="emoji-card" id="emoji2">🐐</div>
 
-            alt="Football Player"
+            <div class="emoji-card" id="emoji3">🔟</div>
 
-        >
+        </div>
 
 
 
@@ -121,7 +93,7 @@
 
 
 
-        <!-- Answers -->
+        <!-- Answer Buttons -->
 
         <div class="answers">
 
@@ -146,27 +118,19 @@
         <div class="reveal-card">
 
             <h1 id="revealTitle">
-
                 ✅ Correct
-
             </h1>
 
             <img
-
                 id="revealImage"
-
                 src=""
-
                 alt="Player"
-
             >
 
             <h2 id="revealName"></h2>
 
             <p id="nextText">
-
                 Next Question...
-
             </p>
 
         </div>
@@ -175,7 +139,7 @@
 
 
 
-    <script src="js/players.js"></script>
+    <script src="js/questions.js"></script>
 
     <script src="js/script.js"></script>
 
