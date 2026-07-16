@@ -190,3 +190,114 @@ function startTimer(){
     },1000);
 
 }
+
+// ==========================
+// Part 3
+// ==========================
+
+function checkAnswer(index){
+
+    clearInterval(timerInterval);
+
+    const q = gameQuestions[currentQuestion];
+
+    buttons.forEach(btn => btn.disabled = true);
+
+    const selected = buttons[index].innerHTML;
+
+    if(selected === q.answer){
+
+        score += 10;
+
+        revealTitle.innerHTML = "✅ Correct!";
+
+        revealTitle.style.color = "#22c55e";
+
+    }else{
+
+        life--;
+
+        revealTitle.innerHTML = "❌ Wrong!";
+
+        revealTitle.style.color = "#ef4444";
+
+    }
+
+    scoreText.innerHTML = score;
+    lifeText.innerHTML = life;
+
+    revealImage.src = q.image;
+    revealName.innerHTML = q.answer;
+
+    revealScreen.style.display = "flex";
+
+    setTimeout(()=>{
+
+        revealScreen.style.display = "none";
+
+        nextQuestion();
+
+    },2000);
+
+}
+
+
+
+// ==========================
+
+function timeUp(){
+
+    clearInterval(timerInterval);
+
+    const q = gameQuestions[currentQuestion];
+
+    life--;
+
+    lifeText.innerHTML = life;
+
+    revealTitle.innerHTML = "⏰ Time Up!";
+    revealTitle.style.color = "#f59e0b";
+
+    revealImage.src = q.image;
+
+    revealName.innerHTML = q.answer;
+
+    revealScreen.style.display = "flex";
+
+    setTimeout(()=>{
+
+        revealScreen.style.display = "none";
+
+        nextQuestion();
+
+    },2000);
+
+}
+
+
+
+// ==========================
+
+function nextQuestion(){
+
+    if(life <= 0){
+
+        gameOver();
+
+        return;
+
+    }
+
+    currentQuestion++;
+
+    if(currentQuestion >= gameQuestions.length){
+
+        gameOver();
+
+        return;
+
+    }
+
+    loadQuestion();
+
+}
