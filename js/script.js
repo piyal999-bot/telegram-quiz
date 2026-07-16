@@ -301,3 +301,50 @@ function nextQuestion(){
     loadQuestion();
 
 }
+
+// ==========================
+// Part 4
+// ==========================
+
+function gameOver(){
+
+    clearInterval(timerInterval);
+
+    gameScreen.style.display = "none";
+
+    revealScreen.style.display = "flex";
+
+    revealTitle.innerHTML = "🏆 Game Over";
+
+    revealTitle.style.color = "#ffffff";
+
+    revealImage.style.display = "none";
+
+    revealName.innerHTML = "Final Score : " + score;
+
+    document.getElementById("nextText").innerHTML = `
+        <br>
+        <button id="restartBtn">🔄 Play Again</button>
+    `;
+
+    setTimeout(()=>{
+
+        const restartBtn = document.getElementById("restartBtn");
+
+        restartBtn.onclick = ()=>{
+
+            revealImage.style.display = "block";
+
+            document.getElementById("nextText").innerHTML = "Next Question...";
+
+            revealScreen.style.display = "none";
+
+            gameScreen.style.display = "block";
+
+            startGame();
+
+        };
+
+    },100);
+
+}
