@@ -1,69 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football IQ Challenge</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Football IQ Challenge</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
 <div class="container" id="homeScreen">
 
-    <h1>⚽ Football IQ Challenge</h1>
+<h1>⚽ Football IQ Challenge</h1>
 
-    <p class="subtitle">
-        Can you guess the football player?
-    </p>
+<p class="subtitle">
+Can you guess the football player?
+</p>
 
-    <button id="startBtn">▶ Start Game</button>
+<button id="startBtn">
+▶ Start Game
+</button>
 
 </div>
+
 
 
 <div class="container" id="gameScreen" style="display:none;">
 
-    <div class="top-bar">
+<div class="top-bar">
 
-        <div>❤️ <span id="life">3</span></div>
+<div>❤️ <span id="life">3</span></div>
 
-        <div>⭐ <span id="score">0</span></div>
+<div>⭐ <span id="score">0</span></div>
 
-    </div>
+</div>
 
-    <div class="progress">
+<div class="progress">
 
-        <div id="progressBar"></div>
+<div id="progressBar"></div>
 
-    </div>
+</div>
 
-    <div class="questionNo">
+<div class="questionNo">
 
-        Question <span id="questionNumber">1</span> /
-        <span id="totalQuestion">1</span>
+Question
+<span id="questionNumber">1</span>
+/
+<span id="totalQuestion">1</span>
 
-    </div>
+</div>
 
-    <img id="playerImage" src="" alt="Player">
+<img id="playerImage" src="" alt="">
 
-    <h2 id="resultText"></h2>
+<h2 id="resultText"></h2>
 
-    <div class="answers">
+<div class="answers">
 
-        <button class="answer"></button>
+<button class="answer"></button>
 
-        <button class="answer"></button>
+<button class="answer"></button>
 
-        <button class="answer"></button>
+<button class="answer"></button>
 
-        <button class="answer"></button>
+<button class="answer"></button>
 
-    </div>
+</div>
+
+</div>
+
+
+
+<div id="revealScreen">
+
+<h1 id="revealTitle"></h1>
+
+<img id="revealImage" src="">
+
+<h2 id="revealName"></h2>
 
 </div>
 
 <script src="questions.js"></script>
+
 <script src="script.js"></script>
 
 </body>
