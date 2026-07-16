@@ -1,111 +1,183 @@
-const players = [
+const questions = [
 
 {
-    id:1,
-
-    name:"Erling Haaland",
-
-    images:{
-
-        normal:"assets/players/haaland.jpg",
-
-        blur:"assets/blur/haaland.jpg",
-
-        zoom:"assets/zoom/haaland.jpg",
-
-        pixel:"assets/pixel/haaland.jpg",
-
-        jersey:"assets/jersey/haaland.jpg",
-
-        celebration:"assets/celebration/haaland.jpg"
-
-    },
-
-    career:[
-        "Norway",
-        "Molde",
-        "Borussia Dortmund",
-        "Manchester City"
-    ],
-
-    emoji:[
-        "🇳🇴",
-        "🤖",
-        "⚽"
-    ]
-
+    answer: "Lionel Messi",
+    image: "assets/messi.jpg",
+    emoji: ["🇦🇷","🐐","🔟"]
 },
 
 {
-    id:2,
-
-    name:"Kylian Mbappé",
-
-    images:{
-
-        normal:"assets/players/mbappe.jpg",
-
-        blur:"assets/blur/mbappe.jpg",
-
-        zoom:"assets/zoom/mbappe.jpg",
-
-        pixel:"assets/pixel/mbappe.jpg",
-
-        jersey:"assets/jersey/mbappe.jpg",
-
-        celebration:"assets/celebration/mbappe.jpg"
-
-    },
-
-    career:[
-        "France",
-        "Monaco",
-        "PSG",
-        "Real Madrid"
-    ],
-
-    emoji:[
-        "🇫🇷",
-        "⚡",
-        "🐢"
-    ]
-
+    answer: "Cristiano Ronaldo",
+    image: "assets/ronaldo.jpg",
+    emoji: ["🇵🇹","🐐","7️⃣"]
 },
 
 {
-    id:3,
+    answer: "Kylian Mbappé",
+    image: "assets/mbappe.jpg",
+    emoji: ["🇫🇷","⚡","🐢"]
+},
 
-    name:"Jude Bellingham",
+{
+    answer: "Erling Haaland",
+    image: "assets/haaland.jpg",
+    emoji: ["🇳🇴","🤖","⚽"]
+},
 
-    images:{
+{
+    answer: "Vinícius Jr.",
+    image: "assets/vinicius_jr.jpg",
+    emoji: ["🇧🇷","⚡","🤍"]
+},
 
-        normal:"assets/players/bellingham.jpg",
+{
+    answer: "Jude Bellingham",
+    image: "assets/bellingham.jpg",
+    emoji: ["🏴","🧠","⭐"]
+},
 
-        blur:"assets/blur/bellingham.jpg",
+{
+    answer: "Rodrygo",
+    image: "assets/rodrygo.jpg",
+    emoji: ["🇧🇷","🌟","🤍"]
+},
 
-        zoom:"assets/zoom/bellingham.jpg",
+{
+    answer: "Federico Valverde",
+    image: "assets/valverde.jpg",
+    emoji: ["🇺🇾","🚀","🤍"]
+},
 
-        pixel:"assets/pixel/bellingham.jpg",
+{
+    answer: "Mohamed Salah",
+    image: "assets/salah.jpg",
+    emoji: ["🇪🇬","👑","⚽"]
+},
 
-        jersey:"assets/jersey/bellingham.jpg",
+{
+    answer: "Kevin De Bruyne",
+    image: "assets/de_bruyne.jpg",
+    emoji: ["🇧🇪","🎯","🧠"]
+},
 
-        celebration:"assets/celebration/bellingham.jpg"
+{
+    answer: "Rodri",
+    image: "assets/rodri.jpg",
+    emoji: ["🇪🇸","🛡️","⚙️"]
+},
 
-    },
+{
+    answer: "Pedri",
+    image: "assets/pedri.jpg",
+    emoji: ["🇪🇸","🎨","👦"]
+},
 
-    career:[
-        "England",
-        "Birmingham",
-        "Borussia Dortmund",
-        "Real Madrid"
-    ],
+{
+    answer: "Lamine Yamal",
+    image: "assets/yamal.jpg",
+    emoji: ["🇪🇸","🌟","👶"]
+},
 
-    emoji:[
-        "🏴",
-        "⭐",
-        "🦁"
-    ]
+{
+    answer: "Harry Kane",
+    image: "assets/kane.jpg",
+    emoji: ["🏴","🎯","9️⃣"]
+},
 
+{
+    answer: "Son Heung-min",
+    image: "assets/son.jpg",
+    emoji: ["🇰🇷","⚡","😊"]
+},
+
+{
+    answer: "Virgil van Dijk",
+    image: "assets/van_dijk.jpg",
+    emoji: ["🇳🇱","🧱","🛡️"]
+},
+
+{
+    answer: "Alisson",
+    image: "assets/alisson.jpg",
+    emoji: ["🇧🇷","🧤","🧱"]
+},
+
+{
+    answer: "Thibaut Courtois",
+    image: "assets/courtois.jpg",
+    emoji: ["🇧🇪","🧤","📏"]
+},
+
+{
+    answer: "Bukayo Saka",
+    image: "assets/saka.jpg",
+    emoji: ["🏴","🌶️","⚡"]
+},
+
+{
+    answer: "Raphinha",
+    image: "assets/raphinha.jpg",
+    emoji: ["🇧🇷","🎯","💨"]
+},
+
+{
+    answer: "Ousmane Dembélé",
+    image: "assets/dembele.jpg",
+    emoji: ["🇫🇷","💨","🦵"]
+},
+
+{
+    answer: "João Félix",
+    image: "assets/joao_felix.jpg",
+    emoji: ["🇵🇹","🎩","✨"]
+},
+
+{
+    answer: "Martin Ødegaard",
+    image: "assets/odegaard.jpg",
+    emoji: ["🇳🇴","🎯","👑"]
+},
+
+{
+    answer: "Bernardo Silva",
+    image: "assets/bernardo_silva.jpg",
+    emoji: ["🇵🇹","🧠","🔵"]
+},
+
+{
+    answer: "Declan Rice",
+    image: "assets/declan_rice.jpg",
+    emoji: ["🏴","🌾","🛡️"]
+},
+
+{
+    answer: "Julián Álvarez",
+    image: "assets/julian_alvarez.jpg",
+    emoji: ["🇦🇷","🕷️","⚽"]
+},
+
+{
+    answer: "Robert Lewandowski",
+    image: "assets/lewandowski.jpg",
+    emoji: ["🇵🇱","🎯","9️⃣"]
+},
+
+{
+    answer: "Achraf Hakimi",
+    image: "assets/hakimi.jpg",
+    emoji: ["🇲🇦","💨","🛡️"]
+},
+
+{
+    answer: "Phil Foden",
+    image: "assets/foden.jpg",
+    emoji: ["🏴","🪄","👦"]
+},
+
+{
+    answer: "Viktor Gyökeres",
+    image: "assets/gyokeres.jpg",
+    emoji: ["🇸🇪","💪","🎯"]
 }
 
 ];
