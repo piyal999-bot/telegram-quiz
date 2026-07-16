@@ -9,7 +9,9 @@
 </head>
 <body>
 
-<div class="container">
+<body>
+
+<div class="container" id="homeScreen">
 
     <h1>⚽ Football Shadow Challenge</h1>
 
@@ -23,7 +25,39 @@
 
 </div>
 
+<div class="container" id="gameScreen" style="display:none;">
+
+    <div class="top-bar">
+
+        <div>❤️ <span id="life">3</span></div>
+
+        <div>⭐ <span id="score">0</span></div>
+
+    </div>
+
+    <img
+        id="playerImage"
+        src="https://dummyimage.com/300x300/111111/ffffff&text=?"
+        alt="Player"
+    >
+
+    <div class="answers">
+
+        <button class="answer">Erling Haaland</button>
+
+        <button class="answer">Kylian Mbappe</button>
+
+        <button class="answer">Jude Bellingham</button>
+
+        <button class="answer">Harry Kane</button>
+
+    </div>
+
+</div>
+
 <script src="script.js"></script>
+
+</body>
 
 </body>
 </html>
