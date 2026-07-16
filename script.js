@@ -10,7 +10,13 @@ const progressBar = document.getElementById("progressBar");
 const questionNumber = document.getElementById("questionNumber");
 const totalQuestion = document.getElementById("totalQuestion");
 
+const scoreText = document.getElementById("score");
+const lifeText = document.getElementById("life");
+
 let currentQuestion = 0;
+
+let score = 0;
+let life = 3;
 
 let timer = 15;
 let timerInterval;
@@ -19,12 +25,14 @@ document.getElementById("startBtn").addEventListener("click", startGame);
 
 function startGame(){
 
-    home.style.display="none";
-    game.style.display="block";
+    home.style.display = "none";
+    game.style.display = "block";
 
-    totalQuestion.innerHTML=questions.length;
+    currentQuestion = 0;
+    score = 0;
+    life = 3;
 
-    currentQuestion=0;
+    totalQuestion.innerHTML = questions.length;
 
     loadQuestion();
 
@@ -34,27 +42,29 @@ function loadQuestion(){
 
     clearInterval(timerInterval);
 
-    timer=15;
+    timer = 15;
 
-    progressBar.style.width="100%";
+    progressBar.style.width = "100%";
 
-    questionNumber.innerHTML=currentQuestion+1;
+    scoreText.innerHTML = score;
+    lifeText.innerHTML = life;
 
-    const q=questions[currentQuestion];
+    questionNumber.innerHTML = currentQuestion + 1;
 
-    playerImage.src=q.image;
+    const q = questions[currentQuestion];
 
-    resultText.innerHTML="";
+    playerImage.src = q.image;
+
+    resultText.innerHTML = "";
 
     buttons.forEach((btn,index)=>{
 
-        btn.disabled=false;
+        btn.disabled = false;
+        btn.style.background = "";
 
-        btn.style.background="";
+        btn.innerHTML = q.options[index];
 
-        btn.innerHTML=q.options[index];
-
-        btn.onclick=()=>checkAnswer(index);
+        btn.onclick = ()=>checkAnswer(index);
 
     });
 
@@ -64,11 +74,11 @@ function loadQuestion(){
 
 function startTimer(){
 
-    timerInterval=setInterval(()=>{
+    timerInterval = setInterval(()=>{
 
         timer--;
 
-        progressBar.style.width=(timer/15)*100+"%";
+        progressBar.style.width = (timer/15)*100+"%";
 
         if(timer<=0){
 
@@ -86,17 +96,21 @@ function checkAnswer(index){
 
     clearInterval(timerInterval);
 
-    const q=questions[currentQuestion];
+    const q = questions[currentQuestion];
 
     buttons.forEach(btn=>btn.disabled=true);
 
     if(buttons[index].innerHTML===q.answer){
+
+        score += 10;
 
         buttons[index].style.background="#16a34a";
 
         resultText.innerHTML="✅ Correct";
 
     }else{
+
+        life--;
 
         buttons[index].style.background="#dc2626";
 
@@ -114,7 +128,10 @@ function checkAnswer(index){
 
     }
 
-    playerImage.src=q.reveal;
+    scoreText.innerHTML = score;
+    lifeText.innerHTML = life;
+
+    playerImage.src = q.reveal;
 
     setTimeout(nextQuestion,2000);
 
@@ -124,7 +141,11 @@ function timeUp(){
 
     clearInterval(timerInterval);
 
-    const q=questions[currentQuestion];
+    life--;
+
+    lifeText.innerHTML = life;
+
+    const q = questions[currentQuestion];
 
     buttons.forEach(btn=>btn.disabled=true);
 
@@ -148,6 +169,14 @@ function timeUp(){
 
 function nextQuestion(){
 
+    if(life<=0){
+
+        gameOver();
+
+        return;
+
+    }
+
     currentQuestion++;
 
     if(currentQuestion>=questions.length){
@@ -157,5 +186,13 @@ function nextQuestion(){
     }
 
     loadQuestion();
+
+}
+
+function gameOver(){
+
+    alert("Game Over!\n\nFinal Score : "+score);
+
+    location.reload();
 
 }
