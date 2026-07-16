@@ -1,45 +1,45 @@
 const questions = [
 
 {
-image:"assets/haaland.jpg",
+    zoomImage: "assets/players/haaland_zoom.jpg",
+    fullImage: "assets/players/haaland.jpg",
 
-correct:"Erling Haaland",
+    correct: "Erling Haaland",
 
-options:[
-"Erling Haaland",
-"Harry Kane",
-"Kylian Mbappé",
-"Jude Bellingham"
-]
-
+    options: [
+        "Erling Haaland",
+        "Harry Kane",
+        "Kylian Mbappé",
+        "Jude Bellingham"
+    ]
 },
 
 {
-image:"assets/mbappe.jpg",
+    zoomImage: "assets/players/mbappe_zoom.jpg",
+    fullImage: "assets/players/mbappe.jpg",
 
-correct:"Kylian Mbappé",
+    correct: "Kylian Mbappé",
 
-options:[
-"Kylian Mbappé",
-"Vinicius Jr",
-"Erling Haaland",
-"Harry Kane"
-]
-
+    options: [
+        "Kylian Mbappé",
+        "Vinicius Jr",
+        "Erling Haaland",
+        "Harry Kane"
+    ]
 },
 
 {
-image:"assets/bellingham.jpg",
+    zoomImage: "assets/players/bellingham_zoom.jpg",
+    fullImage: "assets/players/bellingham.jpg",
 
-correct:"Jude Bellingham",
+    correct: "Jude Bellingham",
 
-options:[
-"Jude Bellingham",
-"Pedri",
-"Kevin De Bruyne",
-"Lionel Messi"
-]
-
+    options: [
+        "Jude Bellingham",
+        "Pedri",
+        "Kevin De Bruyne",
+        "Lionel Messi"
+    ]
 }
 
 ];
