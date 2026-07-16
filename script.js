@@ -3,64 +3,74 @@ const game = document.getElementById("gameScreen");
 
 const playerImage = document.getElementById("playerImage");
 const resultText = document.getElementById("resultText");
-const timerText = document.getElementById("timer");
 
 const buttons = document.querySelectorAll(".answer");
 
+const progressBar = document.getElementById("progressBar");
+const questionNumber = document.getElementById("questionNumber");
+const totalQuestion = document.getElementById("totalQuestion");
+
 let currentQuestion = 0;
+
 let timer = 15;
 let timerInterval;
 
 document.getElementById("startBtn").addEventListener("click", startGame);
 
-function startGame() {
+function startGame(){
 
-    home.style.display = "none";
-    game.style.display = "block";
+    home.style.display="none";
+    game.style.display="block";
 
-    currentQuestion = 0;
+    totalQuestion.innerHTML=questions.length;
+
+    currentQuestion=0;
 
     loadQuestion();
 
 }
 
-function loadQuestion() {
+function loadQuestion(){
 
     clearInterval(timerInterval);
 
-    timer = 15;
-    timerText.innerHTML = timer;
+    timer=15;
 
-    const q = questions[currentQuestion];
+    progressBar.style.width="100%";
 
-    playerImage.src = q.image;
+    questionNumber.innerHTML=currentQuestion+1;
 
-    resultText.innerHTML = "";
+    const q=questions[currentQuestion];
 
-    for (let i = 0; i < buttons.length; i++) {
+    playerImage.src=q.image;
 
-        buttons[i].disabled = false;
-        buttons[i].style.background = "";
+    resultText.innerHTML="";
 
-        buttons[i].innerHTML = q.options[i];
+    buttons.forEach((btn,index)=>{
 
-        buttons[i].onclick = () => checkAnswer(i);
+        btn.disabled=false;
 
-    }
+        btn.style.background="";
+
+        btn.innerHTML=q.options[index];
+
+        btn.onclick=()=>checkAnswer(index);
+
+    });
 
     startTimer();
 
 }
 
-function startTimer() {
+function startTimer(){
 
-    timerInterval = setInterval(() => {
+    timerInterval=setInterval(()=>{
 
         timer--;
 
-        timerText.innerHTML = timer;
+        progressBar.style.width=(timer/15)*100+"%";
 
-        if (timer <= 0) {
+        if(timer<=0){
 
             clearInterval(timerInterval);
 
@@ -76,7 +86,7 @@ function checkAnswer(index){
 
     clearInterval(timerInterval);
 
-    const q = questions[currentQuestion];
+    const q=questions[currentQuestion];
 
     buttons.forEach(btn=>btn.disabled=true);
 
@@ -111,6 +121,8 @@ function checkAnswer(index){
 }
 
 function timeUp(){
+
+    clearInterval(timerInterval);
 
     const q=questions[currentQuestion];
 
