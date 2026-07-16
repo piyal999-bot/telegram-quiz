@@ -1,90 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Football IQ Challenge</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Football IQ Challenge</title>
+
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
 
-<div class="container" id="homeScreen">
+    <!-- Home Screen -->
 
-<h1>⚽ Football IQ Challenge</h1>
+    <div class="container" id="homeScreen">
 
-<p class="subtitle">
-Can you guess the football player?
-</p>
+        <h1>⚽ Football IQ Challenge</h1>
 
-<button id="startBtn">
-▶ Start Game
-</button>
+        <p class="subtitle">
 
-</div>
+            Guess the football player before time runs out!
 
+        </p>
 
+        <button id="startBtn">
 
-<div class="container" id="gameScreen" style="display:none;">
+            ▶ Start Game
 
-<div class="top-bar">
+        </button>
 
-<div>❤️ <span id="life">3</span></div>
-
-<div>⭐ <span id="score">0</span></div>
-
-</div>
-
-<div class="progress">
-
-<div id="progressBar"></div>
-
-</div>
-
-<div class="questionNo">
-
-Question
-<span id="questionNumber">1</span>
-/
-<span id="totalQuestion">1</span>
-
-</div>
-
-<img id="playerImage" src="" alt="">
-
-<h2 id="resultText"></h2>
-
-<div class="answers">
-
-<button class="answer"></button>
-
-<button class="answer"></button>
-
-<button class="answer"></button>
-
-<button class="answer"></button>
-
-</div>
-
-</div>
+    </div>
 
 
 
-<div id="revealScreen">
+    <!-- Game Screen -->
 
-<h1 id="revealTitle"></h1>
+    <div class="container" id="gameScreen" style="display:none;">
 
-<img id="revealImage" src="">
+        <!-- Top Bar -->
 
-<h2 id="revealName"></h2>
+        <div class="top-bar">
 
-</div>
+            <div class="life-box">
 
-<script src="questions.js"></script>
+                ❤️ <span id="life">3</span>
 
-<script src="script.js"></script>
+            </div>
+
+            <div class="score-box">
+
+                ⭐ <span id="score">0</span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Timer -->
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+
+
+        <!-- Question Number -->
+
+        <div class="questionNo">
+
+            Question
+
+            <span id="questionNumber">1</span>
+
+            /
+
+            <span id="totalQuestion">0</span>
+
+        </div>
+
+
+
+        <!-- Game Mode -->
+
+        <div class="mode-box">
+
+            <span id="gameMode">
+
+                Blur Challenge
+
+            </span>
+
+        </div>
+
+
+
+        <!-- Image -->
+
+        <img
+
+            id="playerImage"
+
+            src=""
+
+            alt="Football Player"
+
+        >
+
+
+
+        <!-- Result -->
+
+        <h2 id="resultText"></h2>
+
+
+
+        <!-- Answers -->
+
+        <div class="answers">
+
+            <button class="answer"></button>
+
+            <button class="answer"></button>
+
+            <button class="answer"></button>
+
+            <button class="answer"></button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Reveal Screen -->
+
+    <div id="revealScreen">
+
+        <div class="reveal-card">
+
+            <h1 id="revealTitle">
+
+                ✅ Correct
+
+            </h1>
+
+            <img
+
+                id="revealImage"
+
+                src=""
+
+                alt="Player"
+
+            >
+
+            <h2 id="revealName"></h2>
+
+            <p id="nextText">
+
+                Next Question...
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="js/players.js"></script>
+
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>
